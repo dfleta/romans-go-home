@@ -38,7 +38,7 @@ public class NumeroRomano {
 	
 	public void initArrayRegex() {
 		assertThat(regex).isNotEqualTo(null);
-		regex.addRegex("grupoSumatorio", "[MCXI]{3}|(?<!C)[DM]|(?<!X)[LC](?!D)|(?<!I)[VX](?![LC])|I(?![VX])");
+		regex.addRegex("grupoSumatorio", "(?<!C)[DM]|(?<!X)[LC](?!D)|(?<!I)[VX](?![LC])|I(?![VX])");
 		regex.addRegex("grupoSustractivo", "(C[DM])|(X[LC])|(I[VX])");
 	}
 	

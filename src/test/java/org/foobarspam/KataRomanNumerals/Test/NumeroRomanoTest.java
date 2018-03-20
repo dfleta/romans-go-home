@@ -38,9 +38,12 @@ public class NumeroRomanoTest {
         numeroRomano.setNumeroRomano(testCase);
         assertEquals(3000, numeroRomano.toDecimal());
 
-        testCase = "MMMM";
-        numeroRomano.setNumeroRomano(testCase);
-        assertEquals(0, numeroRomano.toDecimal());
+        /**
+         * El caso MMMM es control de errores 
+         * y no puede estas en el test de la logica
+         * Asumimos que la entrada es correcta.
+         * Sino, hay que añadir un modulo barricada
+         */
     }
 
     @Test
@@ -48,7 +51,6 @@ public class NumeroRomanoTest {
 
         String testCase = "CCC";
         numeroRomano.setNumeroRomano(testCase);
-
         assertEquals(300, numeroRomano.toDecimal());
     }
 
