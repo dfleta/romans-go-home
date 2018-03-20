@@ -26,15 +26,15 @@ public class NumeroRomanoTest {
     @Test
     public void grupo_M_test() {
 
-        String testCase = "M";
+        String testCase = "UMU";
         numeroRomano.setNumeroRomano(testCase);
         assertEquals(1000, numeroRomano.toDecimal());
 
-        testCase = "MM";
+        testCase = "UMMU";
         numeroRomano.setNumeroRomano(testCase);
         assertEquals(2000, numeroRomano.toDecimal());
 
-        testCase = "MMM";
+        testCase = "UMMMU";
         numeroRomano.setNumeroRomano(testCase);
         assertEquals(3000, numeroRomano.toDecimal());
 
@@ -49,7 +49,7 @@ public class NumeroRomanoTest {
     @Test
     public void tres_repeticiones_C_test() {
 
-        String testCase = "CCC";
+        String testCase = "UCCCU";
         numeroRomano.setNumeroRomano(testCase);
         assertEquals(300, numeroRomano.toDecimal());
     }
@@ -57,7 +57,7 @@ public class NumeroRomanoTest {
     @Test
     public void tres_repeticiones_X_test() {
 
-        String testCase = "XXX";
+        String testCase = "UXXXU";
         numeroRomano.setNumeroRomano(testCase);
 
         assertEquals(30, numeroRomano.toDecimal());
@@ -66,7 +66,7 @@ public class NumeroRomanoTest {
     @Test
     public void tres_repeticiones_I_test() {
 
-        String testCase = "III";
+        String testCase = "UIIIU";
         numeroRomano.setNumeroRomano(testCase);
 
         assertEquals(3, numeroRomano.toDecimal());
@@ -79,11 +79,11 @@ public class NumeroRomanoTest {
     @Test
     public void grupo_C_DM_test() {
 
-        String testCase = "CD";
+        String testCase = "UCDU";
         numeroRomano.setNumeroRomano(testCase);
         assertEquals(400, numeroRomano.toDecimal());
 
-        testCase = "CM";
+        testCase = "UCMU";
         numeroRomano.setNumeroRomano(testCase);
         assertEquals(900, numeroRomano.toDecimal());
     }
@@ -93,6 +93,22 @@ public class NumeroRomanoTest {
 
         String testCase = "XL";
         numeroRomano.setNumeroRomano(testCase);
-        assertEquals(40, numeroRomano.toDecimal());      
+        assertEquals(40, numeroRomano.toDecimal());  
+
+        testCase = "XC";
+        numeroRomano.setNumeroRomano(testCase);
+        assertEquals(90, numeroRomano.toDecimal());        
+    }
+
+    @Test
+    public void grupo_I_VX_test() {
+
+        String testCase = "IV";
+        numeroRomano.setNumeroRomano(testCase);
+        assertEquals(4, numeroRomano.toDecimal());  
+
+        testCase = "IX";
+        numeroRomano.setNumeroRomano(testCase);
+        assertEquals(9, numeroRomano.toDecimal());  
     }
 }

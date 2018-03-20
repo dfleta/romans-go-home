@@ -40,6 +40,9 @@ public class NumeroRomano {
 		assertThat(regex).isNotEqualTo(null);
 		regex.addRegex("grupoSumatorio", "(?<!C)[DM]|(?<!X)[LC](?!D)|(?<!I)[VX](?![LC])|I(?![VX])");
 		regex.addRegex("grupoSustractivo", "(C[DM])|(X[LC])|(I[VX])");
+		
+		// "(?<!C)[DM]|(?<!X)[LC](?!D)|(?<!I)[VX](?![LC])|I(?![VX])"
+		// "(C[DM])|(X[LC])|(I[VX])"
 	}
 	
 	public short toDecimal(){
@@ -86,6 +89,7 @@ public class NumeroRomano {
 	}
 	
     private short valorGrupoSustractivo(String grupoSustractivo){
+		assertThat(grupoSustractivo.length()).isEqualTo(2);
     	return (short) (valorDecimal(grupoSustractivo.charAt(1)) - valorDecimal(grupoSustractivo.charAt(0)));
     }
 }
