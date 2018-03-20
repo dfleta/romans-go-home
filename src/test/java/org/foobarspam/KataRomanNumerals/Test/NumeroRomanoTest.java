@@ -1,6 +1,7 @@
 package org.foobarspam.KataRomanNumerals.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 import org.foobarspam.KataRomanNumerals.NumeroRomano;
 import org.foobarspam.KataRomanNumerals.RegexNumerosRomanos;
@@ -38,6 +39,10 @@ public class NumeroRomanoTest {
         numeroRomano.setNumeroRomano(testCase);
         assertEquals(3000, numeroRomano.toDecimal());
 
+        testCase = "UCMU";
+        numeroRomano.setNumeroRomano(testCase);
+        assertNotEquals(1000, numeroRomano.toDecimal());
+
         /**
          * El caso MMMM es control de errores 
          * y no puede estas en el test de la logica
@@ -49,27 +54,39 @@ public class NumeroRomanoTest {
     @Test
     public void tres_repeticiones_C_test() {
 
-        String testCase = "UCCCU";
+        String testCase = "MMMUCCCU";
         numeroRomano.setNumeroRomano(testCase);
-        assertEquals(300, numeroRomano.toDecimal());
+        assertEquals(3300, numeroRomano.toDecimal());
     }
 
     @Test
     public void tres_repeticiones_X_test() {
 
-        String testCase = "UXXXU";
+        String testCase = "MMMUXXXU";
         numeroRomano.setNumeroRomano(testCase);
 
-        assertEquals(30, numeroRomano.toDecimal());
+        assertEquals(3030, numeroRomano.toDecimal());
     }
 
     @Test
     public void tres_repeticiones_I_test() {
 
-        String testCase = "UIIIU";
+        String testCase = "MMMUIIIU";
         numeroRomano.setNumeroRomano(testCase);
 
-        assertEquals(3, numeroRomano.toDecimal());
+        assertEquals(3003, numeroRomano.toDecimal());
+    }
+
+    @Test
+    public void una_D_test() {
+
+        String testCase = "MMMUDUIIIU";
+        numeroRomano.setNumeroRomano(testCase);
+        assertEquals(3503, numeroRomano.toDecimal());
+
+        testCase = "MMMUCDUIIIU";
+        numeroRomano.setNumeroRomano(testCase);
+        assertNotEquals(3503, numeroRomano.toDecimal());
     }
 
     /**
@@ -91,11 +108,11 @@ public class NumeroRomanoTest {
     @Test
     public void grupo_X_LC_test() {
 
-        String testCase = "XL";
+        String testCase = "UXLU";
         numeroRomano.setNumeroRomano(testCase);
         assertEquals(40, numeroRomano.toDecimal());  
 
-        testCase = "XC";
+        testCase = "UXCU";
         numeroRomano.setNumeroRomano(testCase);
         assertEquals(90, numeroRomano.toDecimal());        
     }
@@ -103,11 +120,11 @@ public class NumeroRomanoTest {
     @Test
     public void grupo_I_VX_test() {
 
-        String testCase = "IV";
+        String testCase = "UIVU";
         numeroRomano.setNumeroRomano(testCase);
         assertEquals(4, numeroRomano.toDecimal());  
 
-        testCase = "IX";
+        testCase = "UIXU";
         numeroRomano.setNumeroRomano(testCase);
         assertEquals(9, numeroRomano.toDecimal());  
     }
