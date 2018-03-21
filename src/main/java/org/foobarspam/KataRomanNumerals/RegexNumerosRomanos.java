@@ -1,5 +1,6 @@
 package org.foobarspam.KataRomanNumerals;
 
+import java.util.Collection;
 import java.util.HashMap;
 
 public class RegexNumerosRomanos {
@@ -11,10 +12,14 @@ public class RegexNumerosRomanos {
 	}
 
 	public HashMap<String, String> getRegex() {
-		return regex;
+		return this.regex;
 	}
 
 	public String getRegexValue(String key) {
-		return regex.get(key);
+		return this.regex.get(key);
+	}
+
+	public Collection<String> getValues() {
+		return this.regex.values();
 	}
 }

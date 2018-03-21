@@ -1,7 +1,5 @@
 package org.foobarspam.KataRomanNumerals;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.foobarspam.KataRomanNumerals.SimbolosRomanos;
@@ -24,15 +22,24 @@ public class NumeroRomano {
 
 	public void setNumeroRomano(String numeroRomano) {
 		this.numeroRomano = numeroRomano;
+		this.setNumeroDecimal((short) 0);
 	}
 
 	public void setRegex(RegexNumerosRomanos regex) {
 		this.regex = regex;
 	}
 
+	public RegexNumerosRomanos getRegex() {
+		return this.regex;
+	}
+
 	public String getNumeroRomano() {
 		return this.numeroRomano;
 	}
+
+	public void setNumeroDecimal(short numeroDecimal) {
+		this.numeroDecimal = numeroDecimal;
+	} 
 
 	public short getNumeroDecimal() {
 		return this.numeroDecimal;
@@ -44,10 +51,10 @@ public class NumeroRomano {
 	}
 
 	public short toDecimal() {
-		Matcher matcher = createMatcher(this.getRegexGrupo("grupoSumatorio"));
-		groupSumatoryToDecimal(matcher);
-		matcher = createMatcher(this.getRegexGrupo("grupoSustractivo"));
-		groupSustractiveToDecimal(matcher);
+		for(String regex : getRegex().getValues()) {
+			Matcher matcher = createMatcher(regex);
+			groupSumatoryToDecimal(matcher);
+		}		
 		return getNumeroDecimal();
 	}
 
@@ -57,32 +64,14 @@ public class NumeroRomano {
 		return matcher;
 	}
 
-	private String getRegexGrupo(String grupo) {
-		return regex.getRegexValue(grupo);
-	}
-
 	private void groupSumatoryToDecimal(Matcher matcher) {
-		this.numeroDecimal = 0;
 		while (matcher.find()) {
-			for (char numeroRomano : matcher.group().toCharArray()) {
-				this.numeroDecimal += valorDecimal(numeroRomano);
-			}
+				this.numeroDecimal += valorDecimal(matcher.group());
 		}
 	}
 
-	private void groupSustractiveToDecimal(Matcher matcher) {
-		while (matcher.find()) {
-			this.numeroDecimal += valorGrupoSustractivo(matcher.group());
-		}
-	}
-
-	private short valorDecimal(char numeroRomano) {
+	public short valorDecimal(String numeroRomano) {
 		SimbolosRomanos simbolo = Enum.valueOf(SimbolosRomanos.class, String.valueOf(numeroRomano));
 		return (short) simbolo.getValorDecimal();
-	}
-
-	private short valorGrupoSustractivo(String grupoSustractivo) {
-		assertThat(grupoSustractivo.length()).isEqualTo(2);
-		return (short) (valorDecimal(grupoSustractivo.charAt(1)) - valorDecimal(grupoSustractivo.charAt(0)));
 	}
 }

@@ -14,12 +14,14 @@ public class RomansGoHome {
 		test = "CDXLIV"; // 444
 		test = "CDXXXIX"; // 439
 
-		RegexNumerosRomanos arrayRegex = new RegexNumerosRomanos();
-
 		NumeroRomano sample = new NumeroRomano(test);
 
 		assertThat(sample.toDecimal()).isEqualTo((short) 439);
 
 		System.out.println(sample.getNumeroRomano() + " = " + sample.getNumeroDecimal());
+
+		for(String regex : sample.getRegex().getValues()) {
+			System.out.println(regex);
+		}	
 	}
 }
