@@ -3,7 +3,6 @@ package org.foobarspam.KataRomanNumerals;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.foobarspam.KataRomanNumerals.NumeroRomano;
-import org.foobarspam.KataRomanNumerals.RegexNumerosRomanos;
 
 public class RomansGoHome {
 
@@ -14,13 +13,16 @@ public class RomansGoHome {
 		test = "CDXLIV"; // 444
 		test = "CDXXXIX"; // 439
 
-		NumeroRomano sample = new NumeroRomano(test);
+		NumeroRomano numeroRomano = new NumeroRomano(test);
+		numeroRomano.addRegex("grupoSumatorio", "(?<!C)[DM]|(?<!X)[LC](?![DM])|(?<!I)[VX](?![LC])|I(?![VX])");
+		numeroRomano.addRegex("grupoSustractivo", "(C[DM])|(X[LC])|(I[VX])");
+		// numeroRomano.addRegex("grupo_CD", "(C[DM])");
 
-		assertThat(sample.toDecimal()).isEqualTo((short) 439);
+		assertThat(numeroRomano.toDecimal()).isEqualTo((short) 439);
 
-		System.out.println(sample.getNumeroRomano() + " = " + sample.getNumeroDecimal());
+		System.out.println(numeroRomano.getNumeroRomano() + " = " + numeroRomano.getNumeroDecimal());
 
-		for(String regex : sample.getRegex().getValues()) {
+		for(String regex : numeroRomano.getExpresionesRegulares()) {
 			System.out.println(regex);
 		}	
 	}

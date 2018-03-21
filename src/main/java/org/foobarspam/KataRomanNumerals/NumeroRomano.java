@@ -1,5 +1,7 @@
 package org.foobarspam.KataRomanNumerals;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.foobarspam.KataRomanNumerals.SimbolosRomanos;
@@ -9,15 +11,13 @@ public class NumeroRomano {
 	private String numeroRomano = null;
 	private short numeroDecimal = 0;
 
-	private RegexNumerosRomanos regex = new RegexNumerosRomanos();
+	private RegexNumerosRomanos regexDiccionario = new RegexNumerosRomanos();
 
 	public NumeroRomano() {
-		this.initArrayRegex();
 	};
 
 	public NumeroRomano(String numeroRomano) {
 		this.numeroRomano = numeroRomano;
-		this.initArrayRegex();
 	}
 
 	public void setNumeroRomano(String numeroRomano) {
@@ -25,12 +25,12 @@ public class NumeroRomano {
 		this.setNumeroDecimal((short) 0);
 	}
 
-	public void setRegex(RegexNumerosRomanos regex) {
-		this.regex = regex;
+	public void setRegexDiccionario(RegexNumerosRomanos regex) {
+		this.regexDiccionario = regex;
 	}
 
-	public RegexNumerosRomanos getRegex() {
-		return this.regex;
+	public RegexNumerosRomanos getRegexDiccionario() {
+		return this.regexDiccionario;
 	}
 
 	public String getNumeroRomano() {
@@ -44,14 +44,23 @@ public class NumeroRomano {
 	public short getNumeroDecimal() {
 		return this.numeroDecimal;
 	}
+	
+	public void initRegexDicionario() {
+		getRegexDiccionario().addRegex("grupoSumatorio", "(?<!C)[DM]|(?<!X)[LC](?![DM])|(?<!I)[VX](?![LC])|I(?![VX])");
+		getRegexDiccionario().addRegex("grupoSustractivo", "(C[DM])|(X[LC])|(I[VX])");
+	}
 
-	public void initArrayRegex() {
-		regex.addRegex("grupoSumatorio", "(?<!C)[DM]|(?<!X)[LC](?![DM])|(?<!I)[VX](?![LC])|I(?![VX])");
-		regex.addRegex("grupoSustractivo", "(C[DM])|(X[LC])|(I[VX])");
+	public void addRegex(String descripcion, String regex) {
+		getRegexDiccionario().addRegex(descripcion, regex);
+	}
+
+	public List<String> getExpresionesRegulares() {
+		List<String> listaRegex = new ArrayList<String>(getRegexDiccionario().getRegex().values());
+		return listaRegex;
 	}
 
 	public short toDecimal() {
-		for(String regex : getRegex().getValues()) {
+		for(String regex : getRegexDiccionario().getValues()) {
 			Matcher matcher = createMatcher(regex);
 			groupSumatoryToDecimal(matcher);
 		}		

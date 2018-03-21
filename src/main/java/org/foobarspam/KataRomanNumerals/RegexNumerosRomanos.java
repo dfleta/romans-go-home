@@ -2,24 +2,29 @@ package org.foobarspam.KataRomanNumerals;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Map;
 
 public class RegexNumerosRomanos {
 
-	private HashMap<String, String> regex = new HashMap<String, String>();
+	private Map<String, String> regexDiccionario = new HashMap<String, String>();
 
 	public void addRegex(String key, String value) {
-		this.regex.put(key, value);
+		this.regexDiccionario.put(key, value);
 	}
 
-	public HashMap<String, String> getRegex() {
-		return this.regex;
+	public Map<String, String> getRegex() {
+		return this.regexDiccionario;
 	}
 
 	public String getRegexValue(String key) {
-		return this.regex.get(key);
+		return this.regexDiccionario.get(key);
 	}
 
 	public Collection<String> getValues() {
-		return this.regex.values();
+		return this.regexDiccionario.values();
+	}
+
+	public long longitud() {
+		return this.regexDiccionario.size();
 	}
 }

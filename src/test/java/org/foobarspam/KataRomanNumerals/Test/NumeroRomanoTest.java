@@ -15,11 +15,13 @@ public class NumeroRomanoTest {
     @BeforeClass
     public static void setup() {
         numeroRomano = new NumeroRomano();
+        numeroRomano.initRegexDicionario();
     }
 
     /**
      * Grupos sumatorios M, C, X, I
      */
+
     @Test
     public void grupo_M_test() {
 
@@ -145,7 +147,7 @@ public class NumeroRomanoTest {
     @Test
     public void grupos_substractivos_test() {
         String test = "CDXLIV"; // 444
-        numeroRomano = new NumeroRomano(test);
+        numeroRomano.setNumeroRomano(test);
         assertEquals(444, numeroRomano.toDecimal());
 
         test = "CDXXXIX"; // 439
@@ -156,27 +158,27 @@ public class NumeroRomanoTest {
     @Test
     public void initArrayRegex_test() {
         String test = "V";
-        numeroRomano = new NumeroRomano(test);
-        assertEquals(2, numeroRomano.getRegex().getRegex().size());
+        numeroRomano.setNumeroRomano(test);
+        assertEquals(2, numeroRomano.getRegexDiccionario().longitud());
         assertEquals(5, numeroRomano.valorDecimal(test));
-        assertEquals("(?<!C)[DM]|(?<!X)[LC](?![DM])|(?<!I)[VX](?![LC])|I(?![VX])", numeroRomano.getRegex().getRegexValue("grupoSumatorio"));
-		assertEquals("(C[DM])|(X[LC])|(I[VX])", numeroRomano.getRegex().getRegexValue("grupoSustractivo"));
+        assertEquals("(?<!C)[DM]|(?<!X)[LC](?![DM])|(?<!I)[VX](?![LC])|I(?![VX])", numeroRomano.getRegexDiccionario().getRegexValue("grupoSumatorio"));
+		assertEquals("(C[DM])|(X[LC])|(I[VX])", numeroRomano.getRegexDiccionario().getRegexValue("grupoSustractivo"));
     }
 
     @Test
     public void toDecimal() {
         String test = "V";
-        numeroRomano = new NumeroRomano(test);
-        assertEquals(2, numeroRomano.getRegex().getValues().size());
-        assertTrue(numeroRomano.getRegex().getValues().contains("(?<!C)[DM]|(?<!X)[LC](?![DM])|(?<!I)[VX](?![LC])|I(?![VX])"));
-        assertTrue(numeroRomano.getRegex().getValues().contains("(C[DM])|(X[LC])|(I[VX])"));		
+        numeroRomano.setNumeroRomano(test);
+        assertEquals(2, numeroRomano.getExpresionesRegulares().size());
+        assertTrue(numeroRomano.getRegexDiccionario().getValues().contains("(?<!C)[DM]|(?<!X)[LC](?![DM])|(?<!I)[VX](?![LC])|I(?![VX])"));
+        assertTrue(numeroRomano.getRegexDiccionario().getValues().contains("(C[DM])|(X[LC])|(I[VX])"));		
     }
 
     @Test
     public void valorDecimal_test() {
         String test = "V";
         numeroRomano.setNumeroRomano(test);
-        assertEquals(2, numeroRomano.getRegex().getRegex().size());
+        assertEquals(2, numeroRomano.getRegexDiccionario().getRegex().size());
         assertEquals(5, numeroRomano.valorDecimal(test));
 
         test = "IV"; 
