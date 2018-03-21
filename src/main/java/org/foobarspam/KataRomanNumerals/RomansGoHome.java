@@ -9,20 +9,17 @@ public class RomansGoHome {
 
 	public static void main(String[] args) {
 
-		String test = "MDCCCLXXXVIII"; // 1888
-		test = "MMDCCLXXVII";
+		String test = "MMMDCCCLXXXVIII"; // 3888
+		test = "MMDCCLXXVII";  // 2777
 		test = "CDXLIV"; // 444
 		test = "CDXXXIX"; // 439
 
 		RegexNumerosRomanos arrayRegex = new RegexNumerosRomanos();
 
-		NumeroRomano sample = new NumeroRomano(test, arrayRegex);
-
-		sample.initArrayRegex();
+		NumeroRomano sample = new NumeroRomano(test);
 
 		assertThat(sample.toDecimal()).isEqualTo((short) 439);
 
 		System.out.println(sample.getNumeroRomano() + " = " + sample.getNumeroDecimal());
-
 	}
 }

@@ -91,6 +91,9 @@ public class NumeroRomanoTest {
 
     /**
      * Grupos substractivos
+     * IV(4), IX(9), 
+     * XL(40), XC(90), 
+     * CD(400), CM(900)
      */
 
     @Test
@@ -127,5 +130,30 @@ public class NumeroRomanoTest {
         testCase = "UIXU";
         numeroRomano.setNumeroRomano(testCase);
         assertEquals(9, numeroRomano.toDecimal());  
+    }
+
+    @Test
+    public void grupos_sumatorios_tres_digitos_test() {
+        String test = "MMMDCCCLXXXVIII"; // 3888
+        numeroRomano.setNumeroRomano(test);
+        assertEquals(3888, numeroRomano.toDecimal());
+    }
+
+    @Test
+    public void grupos_sumatorios_test() {
+        String test = "MMDCCLXXVII"; // 2777
+        numeroRomano.setNumeroRomano(test);
+        assertEquals(2777, numeroRomano.toDecimal());
+    }
+
+    @Test
+    public void grupos_substractivos_test() {
+        String test = "CDXLIV"; // 444
+        numeroRomano.setNumeroRomano(test);
+        assertEquals(444, numeroRomano.toDecimal());
+
+        test = "CDXXXIX"; // 439
+        numeroRomano.setNumeroRomano(test);
+        assertEquals(439, numeroRomano.toDecimal());
     }
 }

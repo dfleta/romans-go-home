@@ -11,14 +11,15 @@ public class NumeroRomano {
 	private String numeroRomano = null;
 	private short numeroDecimal = 0;
 
-	private RegexNumerosRomanos regex;
+	private RegexNumerosRomanos regex = new RegexNumerosRomanos();
 
 	public NumeroRomano() {
+		this.initArrayRegex();
 	};
 
-	public NumeroRomano(String numeroRomano, RegexNumerosRomanos regex) {
+	public NumeroRomano(String numeroRomano) {
 		this.numeroRomano = numeroRomano;
-		this.regex = regex;
+		this.initArrayRegex();
 	}
 
 	public void setNumeroRomano(String numeroRomano) {
@@ -38,7 +39,6 @@ public class NumeroRomano {
 	}
 
 	public void initArrayRegex() {
-		assertThat(regex).isNotEqualTo(null);
 		regex.addRegex("grupoSumatorio", "(?<!C)[DM]|(?<!X)[LC](?![DM])|(?<!I)[VX](?![LC])|I(?![VX])");
 		regex.addRegex("grupoSustractivo", "(C[DM])|(X[LC])|(I[VX])");
 	}
