@@ -16,14 +16,9 @@ public class RomansGoHome {
 		NumeroRomano numeroRomano = new NumeroRomano(test);
 		numeroRomano.addRegex("grupoSumatorio", "(?<!C)[DM]|(?<!X)[LC](?![DM])|(?<!I)[VX](?![LC])|I(?![VX])");
 		numeroRomano.addRegex("grupoSustractivo", "(C[DM])|(X[LC])|(I[VX])");
-		// numeroRomano.addRegex("grupo_CD", "(C[DM])");
 
 		assertThat(numeroRomano.toDecimal()).isEqualTo((short) 439);
 
 		System.out.println(numeroRomano.getNumeroRomano() + " = " + numeroRomano.getNumeroDecimal());
-
-		for(String regex : numeroRomano.getExpresionesRegulares()) {
-			System.out.println(regex);
-		}	
 	}
 }
