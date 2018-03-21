@@ -7,15 +7,16 @@ import java.util.regex.Pattern;
 import org.foobarspam.KataRomanNumerals.SimbolosRomanos;
 
 public class NumeroRomano {
-	
+
 	private String numeroRomano = null;
 	private short numeroDecimal = 0;
-	
+
 	private RegexNumerosRomanos regex;
 
-	public NumeroRomano() {};
+	public NumeroRomano() {
+	};
 
-	public NumeroRomano(String numeroRomano, RegexNumerosRomanos regex){
+	public NumeroRomano(String numeroRomano, RegexNumerosRomanos regex) {
 		this.numeroRomano = numeroRomano;
 		this.regex = regex;
 	}
@@ -27,69 +28,61 @@ public class NumeroRomano {
 	public void setRegex(RegexNumerosRomanos regex) {
 		this.regex = regex;
 	}
-	
-	public String getNumeroRomano(){
+
+	public String getNumeroRomano() {
 		return this.numeroRomano;
 	}
-	
-	public short getNumeroDecimal(){
+
+	public short getNumeroDecimal() {
 		return this.numeroDecimal;
 	}
-	
+
 	public void initArrayRegex() {
 		assertThat(regex).isNotEqualTo(null);
 		regex.addRegex("grupoSumatorio", "(?<!C)[DM]|(?<!X)[LC](?![DM])|(?<!I)[VX](?![LC])|I(?![VX])");
 		regex.addRegex("grupoSustractivo", "(C[DM])|(X[LC])|(I[VX])");
-		
-		// "(?<!C)[DM]|(?<!X)[LC](?!D)|(?<!I)[VX](?![LC])|I(?![VX])"
-		// "(C[DM])|(X[LC])|(I[VX])"
 	}
-	
-	public short toDecimal(){
-		// assertThat(regex).isNotEqualTo(null);
+
+	public short toDecimal() {
 		Matcher matcher = createMatcher(this.getRegexGrupo("grupoSumatorio"));
 		groupSumatoryToDecimal(matcher);
 		matcher = createMatcher(this.getRegexGrupo("grupoSustractivo"));
 		groupSustractiveToDecimal(matcher);
 		return getNumeroDecimal();
 	}
-	
-	private Matcher createMatcher(String regex){
-        Pattern pattern = Pattern.compile(regex);
+
+	private Matcher createMatcher(String regex) {
+		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(this.numeroRomano);
 		return matcher;
 	}
-	
-	private String getRegexGrupo(String grupo){
+
+	private String getRegexGrupo(String grupo) {
 		return regex.getRegexValue(grupo);
 	}
-	
-	private void groupSumatoryToDecimal(Matcher matcher){
+
+	private void groupSumatoryToDecimal(Matcher matcher) {
 		this.numeroDecimal = 0;
-		while(matcher.find()){
-			 // System.out.println( matcher.group() + " PASS");
-			 for(char numeroRomano : matcher.group().toCharArray()){					 
-				 this.numeroDecimal += valorDecimal(numeroRomano);
-			 }
-			 // System.out.println("En decimal: " + numeroDecimal);
+		while (matcher.find()) {
+			for (char numeroRomano : matcher.group().toCharArray()) {
+				this.numeroDecimal += valorDecimal(numeroRomano);
+			}
 		}
 	}
-	
-	private void groupSustractiveToDecimal(Matcher matcher){
-		while(matcher.find()){
-				 // System.out.println( matcher.group() + " PASS");
-				 // System.out.println("En decimal: " + valorGrupoSustractivo(matcher.group()));
-				 this.numeroDecimal += valorGrupoSustractivo(matcher.group());
+
+	private void groupSustractiveToDecimal(Matcher matcher) {
+		while (matcher.find()) {
+			this.numeroDecimal += valorGrupoSustractivo(matcher.group());
 		}
 	}
-	
+
 	private short valorDecimal(char numeroRomano) {
-    	SimbolosRomanos simbolo = Enum.valueOf(SimbolosRomanos.class, String.valueOf(numeroRomano));    	
-    	return (short) simbolo.getValorDecimal();
+		SimbolosRomanos simbolo = Enum.valueOf(SimbolosRomanos.class, String.valueOf(numeroRomano));
+		return (short) simbolo.getValorDecimal();
 	}
-	
-    private short valorGrupoSustractivo(String grupoSustractivo){
+
+	private short valorGrupoSustractivo(String grupoSustractivo) {
 		assertThat(grupoSustractivo.length()).isEqualTo(2);
-    	return (short) (valorDecimal(grupoSustractivo.charAt(1)) - valorDecimal(grupoSustractivo.charAt(0)));
-    }
+		return (short) (valorDecimal(grupoSustractivo.charAt(1)) - valorDecimal(grupoSustractivo.charAt(0)));
+	}
 }
