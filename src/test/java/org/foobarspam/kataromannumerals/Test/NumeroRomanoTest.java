@@ -1,10 +1,10 @@
-package org.foobarspam.KataRomanNumerals.Test;
+package org.foobarspam.kataromannumerals.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
-import org.foobarspam.KataRomanNumerals.NumeroRomano;
+import org.foobarspam.kataromannumerals.NumeroRomano;
 import org.junit.BeforeClass;
 import org.junit.Test;
 

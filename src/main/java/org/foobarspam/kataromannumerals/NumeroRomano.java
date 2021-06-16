@@ -1,10 +1,9 @@
-package org.foobarspam.KataRomanNumerals;
+package org.foobarspam.kataromannumerals;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import org.foobarspam.KataRomanNumerals.SimbolosRomanos;
 
 public class NumeroRomano {
 

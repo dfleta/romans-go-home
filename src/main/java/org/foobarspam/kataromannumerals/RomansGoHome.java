@@ -1,8 +1,6 @@
-package org.foobarspam.KataRomanNumerals;
+package org.foobarspam.kataromannumerals;
 
 import static org.assertj.core.api.Assertions.assertThat;
-
-import org.foobarspam.KataRomanNumerals.NumeroRomano;
 
 public class RomansGoHome {
 

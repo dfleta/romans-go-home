@@ -1,4 +1,4 @@
-package org.foobarspam.KataRomanNumerals;
+package org.foobarspam.kataromannumerals;
 
 public enum SimbolosRomanos {
 	
