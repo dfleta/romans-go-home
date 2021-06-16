@@ -10,23 +10,26 @@
   <name>KataRomanNumerals</name>
   <url>http://maven.apache.org</url>
 
-  <properties>
+ <properties>
+    <compiler-plugin.version>3.8.1</compiler-plugin.version>
+    <maven.compiler.parameters>true</maven.compiler.parameters>
+    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <surefire-plugin.version>3.0.0-M5</surefire-plugin.version>
   </properties>
 
   <dependencies>
-	<!-- https://mvnrepository.com/artifact/junit/junit -->
-	<dependency>
-	    <groupId>junit</groupId>
-	    <artifactId>junit</artifactId>
-	    <version>4.12</version>
-	</dependency>	  
-	<!-- https://mvnrepository.com/artifact/org.assertj/assertj-core -->
-	<dependency>
-	    <groupId>org.assertj</groupId>
-	    <artifactId>assertj-core</artifactId>
-	    <version>3.6.2</version>
-	</dependency>
-		
+    <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>4.13.1</version>
+    </dependency>	  
+    <dependency>
+        <groupId>org.assertj</groupId>
+        <artifactId>assertj-core</artifactId>
+        <version>3.6.2</version>
+    </dependency>
   </dependencies>
 </project>
