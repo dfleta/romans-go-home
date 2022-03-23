@@ -43,7 +43,7 @@ public class NumeroRomanoTest {
 
         /**
          * El caso MMMM es control de errores 
-         * y no puede estas en el test de la logica
+         * y no puede estar en el test de la logica
          * Asumimos que la entrada es correcta.
          * Sino, hay que programar la gestion de errores
          */
