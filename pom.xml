@@ -4,11 +4,11 @@
 
   <groupId>org.foobarspam</groupId>
   <artifactId>KataRomanNumerals</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>KataRomanNumerals</name>
-  <url>http://maven.apache.org</url>
+  <url>https://github.com/dfleta/romans-go-home</url>
 
  <properties>
     <compiler-plugin.version>3.8.1</compiler-plugin.version>
