@@ -61,8 +61,8 @@ Los símbolos con base 5 no pueden utilizarse para restar (p.e. 45 se escribe �
 
 Utilizad los que aparecen en el artículo de la Wikipedia, que explican cómo funcionan las normas.
 
-** El código propuesto no existe si no incluye casos test para testear las expresiones regulares y la conversión de los números. 
-Los casos test han de cubrir todas la posibilidades.**
+*El código propuesto no existe si no incluye casos test para testear las expresiones regulares y la conversión de los números. 
+Los casos test han de cubrir todas la posibilidades.*
 
 Si quieres replicar mi arquitectura de clases, utiliza los casos test de mi código:
 
