@@ -10,19 +10,18 @@ public class NumeroRomano {
 	private final String numeroRomano;
 	private short numeroDecimal = 0;
 
-	private RegexNumerosRomanos regexDiccionario = new RegexNumerosRomanos();
+	private RegexRomanNumbers regexDiccionario = new RegexRomanNumbers();
 
 	public NumeroRomano(String numeroRomano) {
 		this.numeroRomano = numeroRomano;
 		this.setNumeroDecimal((short) 0);
-		this.initRegexDicionario();		
 	}
 
-	public void setRegexDiccionario(RegexNumerosRomanos regex) {
+	public void setRegexDiccionario(RegexRomanNumbers regex) {
 		this.regexDiccionario = regex;
 	}
 
-	public RegexNumerosRomanos getRegexDiccionario() {
+	public RegexRomanNumbers getRegexDiccionario() {
 		return this.regexDiccionario;
 	}
 
@@ -37,19 +36,13 @@ public class NumeroRomano {
 	public short getNumeroDecimal() {
 		return this.numeroDecimal;
 	}
-	
-	public void initRegexDicionario() {
-		getRegexDiccionario().addRegex("grupoSumatorio", "(?<!C)[DM]|(?<!X)[LC](?![DM])|(?<!I)[VX](?![LC])|I(?![VX])");
-		getRegexDiccionario().addRegex("grupoSustractivo", "(C[DM])|(X[LC])|(I[VX])");
-	}
 
 	public void addRegex(String descripcion, String regex) {
-		getRegexDiccionario().addRegex(descripcion, regex);
+		this.getRegexDiccionario().addRegex(descripcion, regex);
 	}
 
 	public List<String> getExpresionesRegulares() {
-		List<String> listaRegex = new ArrayList<String>(getRegexDiccionario().getRegex().values());
-		return listaRegex;
+		return new ArrayList<String>(getRegexDiccionario().getRegex().values());
 	}
 
 	public short toDecimal() {

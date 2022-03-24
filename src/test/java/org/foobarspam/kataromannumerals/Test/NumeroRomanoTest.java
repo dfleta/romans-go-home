@@ -152,7 +152,7 @@ public class NumeroRomanoTest {
     public void initArrayRegex_test() {
         String testCase = "V";
         numeroRomano = new NumeroRomano(testCase);
-        assertEquals(2, numeroRomano.getRegexDiccionario().longitud());
+        assertEquals(2, numeroRomano.getRegexDiccionario().numRegex());
         assertEquals(5, numeroRomano.valorDecimal(testCase));
         assertEquals("(?<!C)[DM]|(?<!X)[LC](?![DM])|(?<!I)[VX](?![LC])|I(?![VX])", numeroRomano.getRegexDiccionario().getRegexValue("grupoSumatorio"));
 		assertEquals("(C[DM])|(X[LC])|(I[VX])", numeroRomano.getRegexDiccionario().getRegexValue("grupoSustractivo"));
