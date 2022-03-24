@@ -12,8 +12,7 @@ public class NumeroRomano {
 
 	private RegexNumerosRomanos regexDiccionario = new RegexNumerosRomanos();
 
-	public NumeroRomano() {
-	};
+	public NumeroRomano() {};
 
 	public NumeroRomano(String numeroRomano) {
 		this.numeroRomano = numeroRomano;
@@ -36,7 +35,7 @@ public class NumeroRomano {
 		return this.numeroRomano;
 	}
 
-	public void setNumeroDecimal(short numeroDecimal) {
+	private void setNumeroDecimal(short numeroDecimal) {
 		this.numeroDecimal = numeroDecimal;
 	} 
 

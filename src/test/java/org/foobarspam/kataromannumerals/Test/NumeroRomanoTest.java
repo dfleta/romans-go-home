@@ -5,14 +5,14 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
 import org.foobarspam.kataromannumerals.NumeroRomano;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 public class NumeroRomanoTest {
 
     public static NumeroRomano numeroRomano;
 
-    @BeforeClass
+    @Before
     public static void setup() {
         numeroRomano = new NumeroRomano();
         numeroRomano.initRegexDicionario();
