@@ -9,7 +9,7 @@ public class RegexNumerosRomanos {
 	private Map<String, String> regexDiccionario = new HashMap<String, String>();
 
 	public void addRegex(String key, String value) {
-		this.regexDiccionario.put(key, value);
+		this.regexDiccionario.putIfAbsent(key, value);
 	}
 
 	public Map<String, String> getRegex() {

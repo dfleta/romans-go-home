@@ -7,20 +7,15 @@ import java.util.regex.Pattern;
 
 public class NumeroRomano {
 
-	private String numeroRomano = null;
+	private final String numeroRomano;
 	private short numeroDecimal = 0;
 
 	private RegexNumerosRomanos regexDiccionario = new RegexNumerosRomanos();
 
-	public NumeroRomano() {};
-
 	public NumeroRomano(String numeroRomano) {
 		this.numeroRomano = numeroRomano;
-	}
-
-	public void setNumeroRomano(String numeroRomano) {
-		this.numeroRomano = numeroRomano;
 		this.setNumeroDecimal((short) 0);
+		this.initRegexDicionario();		
 	}
 
 	public void setRegexDiccionario(RegexNumerosRomanos regex) {
