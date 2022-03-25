@@ -4,29 +4,65 @@
 
   <groupId>org.foobarspam</groupId>
   <artifactId>KataRomanNumerals</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>KataRomanNumerals</name>
-  <url>http://maven.apache.org</url>
+  <url>https://github.com/dfleta/romans-go-home</url>
 
-  <properties>
+ <properties>
+    <compiler-plugin.version>3.8.1</compiler-plugin.version>
+    <maven.compiler.parameters>true</maven.compiler.parameters>
+    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <surefire-plugin.version>3.0.0-M5</surefire-plugin.version>
   </properties>
 
   <dependencies>
-	<!-- https://mvnrepository.com/artifact/junit/junit -->
-	<dependency>
-	    <groupId>junit</groupId>
-	    <artifactId>junit</artifactId>
-	    <version>4.12</version>
-	</dependency>	  
-	<!-- https://mvnrepository.com/artifact/org.assertj/assertj-core -->
-	<dependency>
-	    <groupId>org.assertj</groupId>
-	    <artifactId>assertj-core</artifactId>
-	    <version>3.6.2</version>
-	</dependency>
-		
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <version>5.8.2</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-params</artifactId>
+      <version>5.8.2</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.assertj</groupId>
+      <artifactId>assertj-core</artifactId>
+      <version>3.22.0</version>
+    </dependency>
   </dependencies>
+
+  <build>
+      <plugins>
+          <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-surefire-plugin</artifactId>
+              <version>3.0.0-M5</version>
+          </plugin>
+          <plugin>
+              <artifactId>maven-jar-plugin</artifactId>
+              <version>3.2.0</version>
+              <configuration>
+                <archive>
+                  <manifest>
+                      <addClasspath>true</addClasspath>
+                      <mainClass>org.foobarspam.kataromannumerals.RomansGoHome</mainClass>
+                  </manifest>
+                  <manifestEntries>
+                      <url>${project.url}</url>
+                  </manifestEntries>
+                </archive>
+            </configuration>
+        </plugin>
+      </plugins>
+  </build>
+
 </project>
