@@ -1,8 +1,9 @@
 package org.foobarspam.kataromannumerals;
 
-import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class RegexRomanNumbers {
 
@@ -21,19 +22,11 @@ public class RegexRomanNumbers {
 		this.regexCollection.putIfAbsent(key, value);
 	}
 
-	public Map<String, String> getRegex() {
-		return this.regexCollection;
-	}
-
-	public String getRegexValue(String key) {
+	public String getRegex(String key) {
 		return this.regexCollection.get(key);
 	}
 
-	public Collection<String> getValues() {
-		return this.regexCollection.values();
-	}
-
-	public long numRegex() {
-		return this.regexCollection.size();
+	public List<String> getAllRegex() {
+		return this.regexCollection.values().stream().collect(Collectors.toList());
 	}
 }
