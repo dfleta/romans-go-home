@@ -1,13 +1,15 @@
 package org.foobarspam.kataromannumerals.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.foobarspam.kataromannumerals.RomanNumber;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
+// @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 public class NumeroRomanoTest {
 
     public RomanNumber numeroRomano;
@@ -15,25 +17,18 @@ public class NumeroRomanoTest {
     /**
      * Grupos sumatorios M, C, X, I
      */
+    
+    @ParameterizedTest
+    @CsvSource({
+        "1000,  M",
+        "2000,  UMMU",
+        "3000,  UMMMU"
+    })
+    public void grupo_M_test(Short decimal, String roman) {
 
-    @Test
-    public void grupo_M_test() {
-
-        String testCase = "M";
-        numeroRomano = new RomanNumber(testCase);
-        assertEquals(1000, numeroRomano.toDecimal());
-
-        testCase = "UMMU";
-        numeroRomano = new RomanNumber(testCase);
-        assertEquals(2000, numeroRomano.toDecimal());
-
-        testCase = "UMMMU";
-        numeroRomano = new RomanNumber(testCase);
-        assertEquals(3000, numeroRomano.toDecimal());
-
-        testCase = "UCMU";
-        numeroRomano = new RomanNumber(testCase);
-        assertNotEquals(1000, numeroRomano.toDecimal());
+        //String testCase = "M";
+        numeroRomano = new RomanNumber(roman);
+        assertEquals(decimal, numeroRomano.toDecimal());
 
         /**
          * El caso MMMM es control de errores 
@@ -82,7 +77,7 @@ public class NumeroRomanoTest {
     }
 
     /**
-     * Grupos substractivos
+     * Grupos sustractivos
      * IV(4), IX(9), 
      * XL(40), XC(90), 
      * CD(400), CM(900)
@@ -159,7 +154,9 @@ public class NumeroRomanoTest {
         String testCase = "V";
         numeroRomano = new RomanNumber(testCase);
         assertThat(numeroRomano.getRegexCollection().getAllRegex()).hasSize(2);
+        
         assertThat(numeroRomano.getRegexCollection().getAllRegex()).containsExactly("(?<!C)[DM]|(?<!X)[LC](?![DM])|(?<!I)[VX](?![LC])|I(?![VX])", "(C[DM])|(X[LC])|(I[VX])");	
+        
         assertThat(numeroRomano.getRegexCollection().getRegex("grupoSumatorio")).isEqualTo("(?<!C)[DM]|(?<!X)[LC](?![DM])|(?<!I)[VX](?![LC])|I(?![VX])");
         assertThat(numeroRomano.getRegexCollection().getRegex("grupoSustractivo")).isEqualTo("(C[DM])|(X[LC])|(I[VX])");
     }
@@ -168,24 +165,14 @@ public class NumeroRomanoTest {
      * Test del tipo enumerado
      * RomanSymbols
      */
-    @Test
-    public void valor_decimal_test() {
-        String testCase = "V";
-        numeroRomano = new RomanNumber(testCase);
-        assertEquals(5, numeroRomano.decimalValue(testCase));
-
-        testCase = "IV"; 
-        numeroRomano = new RomanNumber(testCase);
-        assertEquals(4, numeroRomano.decimalValue(testCase));
-
-        testCase = "CM"; 
-        numeroRomano = new RomanNumber(testCase);
-        assertEquals(900, numeroRomano.decimalValue(testCase));
-
-        /**
-         *  test = "U";
-         * numeroRomano.setNumeroRomano("U");
-         * assertEquals(900, numeroRomano.valorDecimal(test));
-         */
+    @ParameterizedTest
+    @CsvSource({
+        "5,   V",
+        "4,   IV",
+        "900, CM"
+    })
+    public void valor_decimal_test(Short decimal, String roman) {
+        numeroRomano = new RomanNumber(roman);
+        assertEquals(decimal, numeroRomano.decimalValue(roman));
     }
 }
