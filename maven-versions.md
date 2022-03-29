@@ -232,9 +232,11 @@ Notice that -U means to reload the jars from maven, that ignore the cache jars i
 
 ----------------------------
 
-### 2.3 Cómo especificar las versiones de las dependencias en Maven
+### 2.3 Update properties: cómo especificar las versiones de las dependencias en Maven y actualizarlas desde CLI
 
-Aquí la **sintaxis** de las versiones de maven explicadas:
+Aquí la **sintaxis** de las versiones de maven explicadas.
+
+Understanding Maven Version Numbers:
 
 https://docs.oracle.com/middleware/1212/core/MAVEN/maven_version.htm#MAVEN402
 
@@ -249,4 +251,114 @@ Advancing dependency versions
 
 https://www.mojohaus.org/versions-maven-plugin/examples/advancing-dependency-versions.html
 
-_to be continued..._
+Lo haremos a través de las `properties`
+
+https://www.mojohaus.org/versions-maven-plugin/examples/update-properties.html
+
+
+1. Establecer las versiones de jupiter y  jupiter-params a `5.7.0` y assertj a `2.8.0` mediante `properties`
+
+```xml
+    <properties>
+      ...
+      <jupiter.version>5.7.0</jupiter.version>
+      <params.version>5.7.0</params.version>
+      <assertj.version>2.8.0</assertj.version>
+    </properties>
+
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <!-- strongly recommend this version; [] force this version -->
+      <version>${jupiter.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-params</artifactId>
+      <!-- strongly recommend this version -->
+      <version>${params.version}</version>
+      <scope>test</scope>
+    </dependency>
+```
+
+  y forzar la instalación de esas nuevas versiones:
+
+  `$ maven clean install -U`
+
+  Chequeamos las actualizaciones disponibles:
+
+  ```sh
+  $ mvn versions:display-property-updates
+
+  [INFO] The following version property updates are available:
+  [INFO]   ${jupiter.version} ................................... 5.7.0 -> 5.8.2
+  [INFO]   ${params.version} .................................... 5.7.0 -> 5.8.2
+  [INFO]   ${assertj.version} ................................... 2.8.0 -> 2.9.1
+
+  $ mvn versions:display-dependency-updates
+
+  [INFO] The following dependencies in Dependencies have newer versions:
+  [INFO]   org.junit.jupiter:junit-jupiter-api .................. 5.7.0 -> 5.8.2
+  [INFO]   org.junit.jupiter:junit-jupiter-params ............... 5.7.0 -> 5.8.2
+  [INFO]   org.assertj:assertj-core ............................. 2.8.0 -> 3.22.0
+  ```
+
+2. Incluir el plugin de maven versions para especificar la configuración de la actualización de las versiones:
+   
+```xml
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>versions-maven-plugin</artifactId>
+          <version>2.10.0</version>
+        </plugin>
+```
+
+3. Añadimos la configuración de las actualizaciones:
+
+```xml
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>versions-maven-plugin</artifactId>
+          <version>2.10.0</version>
+          <configuration>
+            <allowIncrementalUpdates>true</allowIncrementalUpdates>
+            <allowMinorUpdates>true</allowMinorUpdates>
+            <allowMajorUpdates>false</allowMajorUpdates>
+            <allowSnapshots>false</allowSnapshots>
+          </configuration>
+        </plugin>
+```
+**No permitiremos cambios en la versión mayor ni en las _snapshots_**
+
+Aquí están las opciones disponibles: **versions:update-properties**
+
+https://www.mojohaus.org/versions-maven-plugin/update-properties-mojo.html
+
+4. Actualizamos las dependencias desde CLI a partir de la configuración indicada:
+
+```sh
+$ mvn versions:update-properties-versions
+
+[INFO] Minor version changes allowed     <<<====
+[INFO] Updated ${jupiter.version} from 5.7.0 to 5.8.2
+[INFO] Minor version changes allowed
+[INFO] Updated ${params.version} from 5.7.0 to 5.8.2
+[INFO] Minor version changes allowed
+[INFO] Updated ${assertj.version} from 2.8.0 to 2.9.1  <<<=== 3.22.0 disponible pero nuestra configuración impide cambios en la version mayor 
+
+$ mvn versions:display-dependency-updates
+
+[INFO] The following dependencies in Dependencies have newer versions:
+[INFO]   org.assertj:assertj-core ............................. 2.9.1 -> 3.22.0  <<<=== nos hemos quedado en la última version menor disponible de la 2
+
+$ mvn versions:display-property-updates
+
+[INFO] The following version properties are referencing the newest available version:
+[INFO]   ${jupiter.version} ............................................ 5.8.2
+[INFO]   ${params.version} ............................................. 5.8.2
+[INFO] The following version properties are referencing the newest available version:
+[INFO]   ${assertj.version} ............................................ 2.9.1
+```
+
+6. 

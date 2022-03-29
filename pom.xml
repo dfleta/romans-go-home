@@ -19,25 +19,28 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <surefire-plugin.version>3.0.0-M5</surefire-plugin.version>
     <!-- aqui los nombres de las versiones de los plugins-->
+    <jupiter.version>5.8.2</jupiter.version>
+    <params.version>5.8.2</params.version>
+    <assertj.version>2.9.1</assertj.version>
   </properties>
 
   <dependencies>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
-      <version>5.8.2</version>
+      <version>${jupiter.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-params</artifactId>
-      <version>5.8.2</version>
+      <version>${params.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.assertj</groupId>
       <artifactId>assertj-core</artifactId>
-      <version>3.22.0</version>
+      <version>${assertj.version}</version>
     </dependency>
   </dependencies>
 
@@ -66,19 +69,19 @@
               <version>3.0.0-M5</version>
         </plugin>
 
-          <plugin>
-              <artifactId>maven-jar-plugin</artifactId>
-              <version>3.2.0</version>
-              <configuration>
-                <archive>
-                  <manifest>
-                      <addClasspath>true</addClasspath>
-                      <mainClass>org.foobarspam.kataromannumerals.RomansGoHome</mainClass>
-                  </manifest>
-                  <manifestEntries>
-                      <url>${project.url}</url>
-                  </manifestEntries>
-                </archive>
+        <plugin>
+            <artifactId>maven-jar-plugin</artifactId>
+            <version>3.2.0</version>
+            <configuration>
+              <archive>
+                <manifest>
+                    <addClasspath>true</addClasspath>
+                    <mainClass>org.foobarspam.kataromannumerals.RomansGoHome</mainClass>
+                </manifest>
+                <manifestEntries>
+                    <url>${project.url}</url>
+                </manifestEntries>
+              </archive>
             </configuration>
         </plugin>
 
@@ -100,6 +103,7 @@
           <version>3.0.0</version>
         </plugin>
 
+      <!-- plugin para establecer la version mínima de maven -->
       <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-enforcer-plugin</artifactId>
@@ -119,7 +123,20 @@
                 </configuration>
               </execution>
             </executions>
+      </plugin>
+      <!-- plugin para controlar la actualizacion de las versiones -->
+      <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>versions-maven-plugin</artifactId>
+          <version>2.10.0</version>          
+          <configuration>
+            <allowIncrementalUpdates>true</allowIncrementalUpdates>
+            <allowMinorUpdates>true</allowMinorUpdates>
+            <allowMajorUpdates>false</allowMajorUpdates>
+            <allowSnapshots>false</allowSnapshots>
+          </configuration>
         </plugin>
+
       </plugins>
 
   </build>
