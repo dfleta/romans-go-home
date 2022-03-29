@@ -119,6 +119,13 @@ o en el script principal:
 
 https://github.com/dfleta/romans-go-home/blob/enumOCP/src/main/java/org/foobarspam/KataRomanNumerals/RomansGoHome.java
 
+
+## Gestión de dependencias con Maven
+
+Configura las dependencias y plugins de tu proyecto como se explica aquí:
+
+[Junit 5 y Maven Versions](./maven-versions.md)
+
 ## Proyecto
 En tu GitHub desde ahora mismo, ¡y no olvides imputar en el panel!
 
