@@ -44,9 +44,14 @@ Observa si los asserts se escriben de la misma manera.
 
 ### Casos test parametrizados
 
-Usa los casos test parametrizados en el caso test de la expresión regular que encontra el símbolo romano `M` repetido de 1 a 3 veces. Estudia los ejemplos de este mecanismo aquí y fíjate cómo lo he resuelto en mi proyecto:
+Usa los casos test parametrizados en el caso test de la expresión regular que encontra el símbolo romano `M` repetido de 1 a 3 veces. Estudia los ejemplos de este mecanismo en la guía de uso de Junit 5:
 
 https://junit.org/junit5/docs/current/user-guide/#writing-tests-parameterized-tests
+
+y fíjate cómo lo he utilizado en los test de este proyecto:
+
+[Casos test](./src/test/java/org/foobarspam/kataromannumerals/Test/NumeroRomanoTest.java)
+
 
 Para usar parameterized tests necesitas la dependencia `junit-jupiter-params artifact`.
 
