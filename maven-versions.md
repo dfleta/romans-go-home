@@ -158,7 +158,7 @@ ya que los plugins instalados me informan de la versión mínima que necesito:
 [INFO] No plugins require a newer version of Maven than specified by the pom.
 ```
 
-#### 2.2 Versiones de los plugins de maven
+#### 2.2 Versiones de los dependencias de maven
 
 
 El plugin _versions_ te avisa si has especificado o no las versiones de los plugins que estás usando y  qué versión estás usando actualmente. 
@@ -345,7 +345,7 @@ https://www.mojohaus.org/versions-maven-plugin/update-properties-mojo.html
 4. Actualizamos las dependencias desde CLI a partir de la configuración indicada:
 
 ```sh
-$ mvn versions:update-properties-versions
+$ mvn versions:update-properties
 
 [INFO] Minor version changes allowed     <<<====
 [INFO] Updated ${jupiter.version} from 5.7.0 to 5.8.2
@@ -368,4 +368,59 @@ $ mvn versions:display-property-updates
 [INFO]   ${assertj.version} ............................................ 2.9.1
 ```
 
-6. 
+### 2.2 Versiones de los plugin de maven
+
+Vamos a gestionar la actualización de los plugins de Maven desde CLI con `properties`.
+
+Utilizamos sólo el plugin `maven-compiler-plugin`, versión actual en el `pom` `3.8.0` y disponible la `3.10.0`.
+
+Incluímos la `property` en el `pom.xml`
+
+```xml
+  <properties>
+    ...
+    <compiler.version>3.8.0</compiler.version>
+  </properties>
+```
+
+y configuramos el plugin:
+
+```xml
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>${compiler.version}</version>          <<<===
+      </plugin>
+```
+
+Chequeamos que esté bien configurado:
+
+```sh
+$ mvn versions:display-property-updates
+
+[INFO] The following version properties are referencing the newest available version:
+[INFO]   ${assertj.version} ............................................ 2.9.1
+[INFO]   ${jupiter.version} ............................................ 5.8.2
+[INFO]   ${params.version} ............................................. 5.8.2
+[INFO] The following version property updates are available:
+[INFO]   ${compiler.version} ................................. 3.8.0 -> 3.10.1    <<<<====
+```
+
+y actualizamos sólo las dependencias /plugin con el `groupid:org.apache.maven.plugins` y cualquier `artifact`
+
+Los parámetros <includes> y <excludes> siguen el formato `groupId:artifactId:type:classifier`. 
+Usa una lista separada por comas para especificar múltiples _includes_. 
+Los metacaracteres (`*`) se pueden usar para hacer _match_ de múltiple valores.
+
+```sh
+$ mvn versions:update-properties -Dincludes:org.apache.maven.plugins:*
+
+[INFO] Minor version changes allowed
+[INFO] Property ${jupiter.version}: Leaving unchanged as 5.8.2
+[INFO] Minor version changes allowed
+[INFO] Property ${assertj.version}: Leaving unchanged as 2.9.1
+[INFO] Minor version changes allowed
+[INFO] Updated ${compiler.version} from 3.8.0 to 3.10.1        <<<<====
+[INFO] Minor version changes allowed
+[INFO] Property ${params.version}: Leaving unchanged as 5.8.2
+```
