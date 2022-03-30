@@ -2,6 +2,13 @@
 Gestion de dependencias con Maven
 =================================
 
+## XML extension
+
+Antes de editar el `pom.xml` es recomendable que instales una extensión en tu editor para manejar este tipo de fichero, como esta:
+
+https://marketplace.visualstudio.com/items?itemName=redhat.vscode-xml 
+
+
 ## Migra de Junit4 a Junit5
 
 Ver proyecto [RomansGoHome](https://github.com/dfleta/romans-go-home)
