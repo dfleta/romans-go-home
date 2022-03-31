@@ -424,3 +424,25 @@ $ mvn versions:update-properties -Dincludes:org.apache.maven.plugins:*
 [INFO] Minor version changes allowed
 [INFO] Property ${params.version}: Leaving unchanged as 5.8.2
 ```
+
+Vamos con el resto de plugins con cambios en la version menor:
+
+```xml
+  <properties>
+    ...
+    <jar.version>3.2.0</jar.version>
+    <report.version>3.0.0</report.version>
+    <resources.version>3.0.2</resources.version>
+    <site.version>3.7.1</site.version>
+  <properties>
+```
+```sh
+$ mvn versions:update-properties -Dincludes:org.apache.maven.plugins:*
+
+[INFO] Minor version changes allowed
+[INFO] Updated ${report.version} from 3.0.0 to 3.2.2
+[INFO] Minor version changes allowed
+[INFO] Updated ${site.version} from 3.7.1 to 3.11.0
+[INFO] Minor version changes allowed
+[INFO] Updated ${jar.version} from 3.2.0 to 3.2.2
+```
