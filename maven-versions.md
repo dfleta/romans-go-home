@@ -406,23 +406,21 @@ $ mvn versions:display-property-updates
 [INFO]   ${compiler.version} ................................. 3.8.0 -> 3.10.1    <<<<====
 ```
 
-y actualizamos sólo las dependencias /plugin con el `groupid:org.apache.maven.plugins` y cualquier `artifact`
+y actualizamos sólo las dependencias /plugin con el `groupid=org.apache.maven.plugins` y cualquier `artifact`
 
 Los parámetros <includes> y <excludes> siguen el formato `groupId:artifactId:type:classifier`. 
 Usa una lista separada por comas para especificar múltiples _includes_. 
 Los metacaracteres (`*`) se pueden usar para hacer _match_ de múltiple valores.
 
 ```sh
-$ mvn versions:update-properties -Dincludes:org.apache.maven.plugins:*
+$ mvn versions:update-properties -Dincludes=org.apache.maven.plugins:*
+
+[INFO] Not updating the property ${assertj.version} because it is used by artifact org.assertj:assertj-core:jar:2.9.1 and that artifact is not included in the list of  allowed artifacts to be updated.
+[INFO] Not updating the property ${jupiter.version} because it is used by artifact org.junit.jupiter:junit-jupiter-api:jar:5.8.2:test and that artifact is not included in the list of  allowed artifacts to be updated.
+[INFO] Not updating the property ${assertj.version} because it is used by artifact org.assertj:assertj-core:jar:2.9.1 and that artifact is not included in the list of  allowed artifacts to be updated.
 
 [INFO] Minor version changes allowed
-[INFO] Property ${jupiter.version}: Leaving unchanged as 5.8.2
-[INFO] Minor version changes allowed
-[INFO] Property ${assertj.version}: Leaving unchanged as 2.9.1
-[INFO] Minor version changes allowed
 [INFO] Updated ${compiler.version} from 3.8.0 to 3.10.1        <<<<====
-[INFO] Minor version changes allowed
-[INFO] Property ${params.version}: Leaving unchanged as 5.8.2
 ```
 
 Vamos con el resto de plugins con cambios en la version menor:
@@ -437,7 +435,7 @@ Vamos con el resto de plugins con cambios en la version menor:
   <properties>
 ```
 ```sh
-$ mvn versions:update-properties -Dincludes:org.apache.maven.plugins:*
+$ mvn versions:update-properties -Dincludes=org.apache.maven.plugins:*
 
 [INFO] Minor version changes allowed
 [INFO] Updated ${report.version} from 3.0.0 to 3.2.2
@@ -446,3 +444,26 @@ $ mvn versions:update-properties -Dincludes:org.apache.maven.plugins:*
 [INFO] Minor version changes allowed
 [INFO] Updated ${jar.version} from 3.2.0 to 3.2.2
 ```
+
+### Cambios en la version mayor
+
+Podemos controlar las actualizaciones en la version mayor de dependencias y plugins desde CLI o desde <plugin> <configuration> en el POM.
+
+Pasamos las opciones de la documentación con `-D[propiedad]`
+
+https://www.mojohaus.org/versions-maven-plugin/use-latest-versions-mojo.html#allowMajorUpdates
+
+Aunque en el POM hayamos indicado sólo minor updates, desde CLI podemos sobreescribir la propiedad <allowMajorUpdates> a `true`.
+
+```sh
+$ mvn versions:display-plugin-updates
+
+[INFO] The following plugin updates are available:
+[INFO]   maven-install-plugin ............................ 2.5.2 -> 3.0.0-M1
+
+$ mvn versions:update-properties -Dincludes=org.apache.maven.plugins:maven-install-plugin -DallowMajorUpdates=true
+
+[INFO] Minor version changes allowed
+[INFO] Updated ${install.version} from 2.5.2 to 3.0.0-M1
+```
+
