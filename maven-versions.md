@@ -62,6 +62,16 @@ y fíjate cómo lo he utilizado en los test de este proyecto:
 
 Para usar parameterized tests necesitas la dependencia `junit-jupiter-params artifact`.
 
+#### Tags y Maven
+
+En este kata resulta útil agrupar los casos test según estemos diseñando los grupos sumatorios o sustractivos, así como las expresiones regulares y el tipo enumerado.
+
+Con la etiqueta `@Tag("grupo")` anotamos los casos test en el grupo correspondiente.
+
+Para seleccionarlos con maven:
+
+`mvn -Dgroups="grupo" test`
+
 -------------------------
 
 

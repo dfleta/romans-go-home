@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.foobarspam.kataromannumerals.RomanNumber;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -24,6 +25,7 @@ public class NumeroRomanoTest {
         "2000,  UMMU",
         "3000,  UMMMU"
     })
+    @Tag("sumatorio")
     public void grupo_M_test(Short decimal, String roman) {
 
         //String testCase = "M";
@@ -39,6 +41,7 @@ public class NumeroRomanoTest {
     }
 
     @Test
+    @Tag("sumatorio")
     public void tres_repeticiones_C_test() {
 
         String testCase = "UMMMUCCCU";
@@ -47,6 +50,7 @@ public class NumeroRomanoTest {
     }
 
     @Test
+    @Tag("sumatorio")
     public void tres_repeticiones_X_test() {
 
         String testCase = "UMMMUXXXU";
@@ -56,6 +60,7 @@ public class NumeroRomanoTest {
     }
 
     @Test
+    @Tag("sumatorio")
     public void tres_repeticiones_I_test() {
 
         String testCase = "UMMMUIIIU";
@@ -65,6 +70,7 @@ public class NumeroRomanoTest {
     }
 
     @Test
+    @Tag("sumatorio")
     public void una_D_test() {
 
         String testCase = "UMMMUDUIIIU";
@@ -84,6 +90,7 @@ public class NumeroRomanoTest {
      */
 
     @Test
+    @Tag("sustractivo")
     public void grupo_C_DM_test() {
 
         String testCase = "UCDU";
@@ -96,6 +103,7 @@ public class NumeroRomanoTest {
     }
 
     @Test
+    @Tag("sustractivo")
     public void grupo_X_LC_test() {
 
         String testCase = "UXLU";
@@ -108,6 +116,7 @@ public class NumeroRomanoTest {
     }
 
     @Test
+    @Tag("sustractivo")
     public void grupo_I_VX_test() {
 
         String testCase = "UIVU";
@@ -120,6 +129,7 @@ public class NumeroRomanoTest {
     }
 
     @Test
+    @Tag("sustractivo")
     public void grupos_sumatorios_tres_digitos_test() {
         String testCase = "MMMDCCCLXXXVIII"; // 3888
         numeroRomano = new RomanNumber(testCase);
@@ -127,6 +137,7 @@ public class NumeroRomanoTest {
     }
 
     @Test
+    @Tag("sustractivo")
     public void grupos_sumatorios_test() {
         String testCase = "MMDCCLXXVII"; // 2777
         numeroRomano = new RomanNumber(testCase);
@@ -134,6 +145,7 @@ public class NumeroRomanoTest {
     }
 
     @Test
+    @Tag("sustractivo")
     public void grupos_substractivos_test() {
         String testCase = "CDXLIV"; // 444
         numeroRomano = new RomanNumber(testCase);
@@ -150,6 +162,7 @@ public class NumeroRomanoTest {
      */
 
     @Test
+    @Tag("regex")
     public void init_regex_collection_test() {
         String testCase = "V";
         numeroRomano = new RomanNumber(testCase);
@@ -166,6 +179,7 @@ public class NumeroRomanoTest {
      * RomanSymbols
      */
     @ParameterizedTest
+    @Tag("enumerado")
     @CsvSource({
         "5,   V",
         "4,   IV",
