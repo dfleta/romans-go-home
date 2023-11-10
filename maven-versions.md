@@ -173,7 +173,7 @@ ya que los plugins instalados me informan de la versión mínima que necesito:
 
 El plugin _versions_ te avisa si has especificado o no las versiones de los plugins que estás usando y  qué versión estás usando actualmente. 
 
-**¡¡La mejor práctica es especificar siempre las versiones de los puglins para así asegurarnos de que el build es reproducible en cualquier máquina!!**
+**¡¡La mejor práctica es especificar siempre las versiones de los plugins para así asegurarnos de que el build es reproducible en cualquier máquina!!**
 
 
  1. Añade en el pom.xml en la sección plugins, los plugin defaults que obtienes de aquí:
@@ -242,9 +242,9 @@ The following plugin updates are available:
 
 Si peta el superpom o alguna de las dependencias no puede resolverse y se ha quedado guardado el `jar` en la cache de Maven, puedes forzar a descargar las dependencias de nuevo desde los repos remotos con la opción `-U`:
 
-`$ mvn clean install -DskipTests -U`
+`mvn clean install -DskipTests -U`
 
-Notice that -U means to reload the jars from maven, that ignore the cache jars in your local file system.
+La opción -U recarga los jars desde maven ignorando los jars en la caché del sistema de ficheros local.
 
 
 ----------------------------
@@ -301,7 +301,7 @@ https://www.mojohaus.org/versions-maven-plugin/examples/update-properties.html
 
   y forzar la instalación de esas nuevas versiones:
 
-  `$ maven clean install -U`
+  `maven clean install -U`
 
   Chequeamos las actualizaciones disponibles:
 
@@ -455,6 +455,23 @@ $ mvn versions:update-properties -Dincludes=org.apache.maven.plugins:*
 [INFO] Updated ${jar.version} from 3.2.0 to 3.2.2
 ```
 
+#### Actualizaciones de los plugins que no se controlan con una property
+
+En este prpyecto estos son los plugins que no poseen una property:
+
+```sh
+mvn versions:display-plugin-updates
+
+    The following plugin updates are available:
+      maven-clean-plugin ................................. 3.1.0 -> 3.3.2
+      maven-enforcer-plugin .............................. 3.0.0 -> 3.4.1
+      maven-surefire-plugin ........................... 3.0.0-M5 -> 3.2.2
+      org.codehaus.mojo:versions-maven-plugin .......... 2.10.0 -> 2.16.1
+      All plugins have a version specified.
+```
+
+No se actualizan con el comando update-properties.
+
 ### Cambios en la version mayor
 
 Podemos controlar las actualizaciones en la version mayor de dependencias y plugins desde CLI o desde <plugin> <configuration> en el POM.
@@ -477,3 +494,16 @@ $ mvn versions:update-properties -Dincludes=org.apache.maven.plugins:maven-insta
 [INFO] Updated ${install.version} from 2.5.2 to 3.0.0-M1
 ```
 
+Con assertj-core tenemos un problema si indicamos que no aceptamos cambios en la versión mayor y queremos actualizar a la última versión, sin afectar al resto de dependencias del proyecto.
+
+Una posible solución es especificar el rango de versiones que aceptamos en el `POM.xml` para esta dependencia:
+
+```xml
+<groupId>org.assertj</groupId>
+<artifactId>assertj-core</artifactId>
+<version>[${assertj.version},)</version>  <=== [ desde incluída, hasta excluída )
+```
+
+Así conseguimos actualizar de 2.9.z a 3.2.z:
+
+`mvn versions:update-properties  -Dincludes=org.assertj:assertj-core -DallowMajorUpdates=true`

@@ -12,24 +12,24 @@
   <properties>
     <compiler-plugin.version>3.8.1</compiler-plugin.version>
     <maven.compiler.parameters>true</maven.compiler.parameters>
-    <maven.compiler.source>11</maven.compiler.source>
-    <maven.compiler.target>11</maven.compiler.target>
+    <maven.compiler.source>21</maven.compiler.source>
+    <maven.compiler.target>21</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <surefire-plugin.version>3.0.0-M5</surefire-plugin.version>
     <!-- nombres de las propiedades para las versiones -->
     <!-- dependencies -->
-    <jupiter.version>5.8.2</jupiter.version>
-    <params.version>5.8.2</params.version>
+    <jupiter.version>5.10.1</jupiter.version>
+    <params.version>5.10.1</params.version>
     <assertj.version>2.9.1</assertj.version>
     <!-- plugins -->
-    <compiler.version>3.10.1</compiler.version>
-    <deploy.version>3.0.0-M2</deploy.version>
-    <install.version>3.0.0-M1</install.version>
-    <jar.version>3.2.2</jar.version>
-    <report.version>3.2.2</report.version>
-    <resources.version>3.2.0</resources.version>
-    <site.version>3.11.0</site.version>
+    <compiler.version>3.11.0</compiler.version>
+    <deploy.version>3.1.1</deploy.version>
+    <install.version>3.1.1</install.version>
+    <jar.version>3.3.0</jar.version>
+    <report.version>3.4.5</report.version>
+    <resources.version>3.3.1</resources.version>
+    <site.version>4.0.0-M11</site.version>
   </properties>
 
   <dependencies>
@@ -48,7 +48,7 @@
     <dependency>
       <groupId>org.assertj</groupId>
       <artifactId>assertj-core</artifactId>
-      <version>${assertj.version}</version>
+      <version>[${assertj.version},)</version>
     </dependency>
   </dependencies>
 
